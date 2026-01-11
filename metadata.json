@@ -1,0 +1,9 @@
+
+{
+  "name": "Softvex - Digital Tech Solutions",
+  "description": "A premium tech solutions website with a modern, block-inspired design, featuring services, about us, contact forms, and a basic admin dashboard.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
