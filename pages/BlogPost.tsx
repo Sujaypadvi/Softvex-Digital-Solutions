@@ -1,23 +1,27 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Calendar, Tag } from 'lucide-react';
-import { BlogPost as BlogPostType, Page } from '../types';
+import { useNavigate, useParams } from 'react-router-dom';
+import { BlogPost as BlogPostType } from '../types';
 import { BLOG_POSTS } from '../constants';
 
-interface BlogPostProps {
-    post: BlogPostType | null;
-    setPage: (page: Page) => void;
-    setSelectedBlogPost: (post: BlogPostType) => void;
-}
+const BlogPost: React.FC = () => {
+    const navigate = useNavigate();
+    const { postId } = useParams();
+    const post = postId ? BLOG_POSTS.find(p => p.id === parseInt(postId)) : null;
 
-const BlogPost: React.FC<BlogPostProps> = ({ post, setPage, setSelectedBlogPost }) => {
+    // Scroll to top when post changes
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [postId]);
+
     if (!post) {
         return (
             <div className="min-h-screen flex items-center justify-center">
                 <div className="text-center">
                     <h2 className="text-2xl font-bold mb-4">Post not found</h2>
                     <button
-                        onClick={() => setPage(Page.Blog)}
+                        onClick={() => navigate('/blog')}
                         className="text-blue-600 hover:underline flex items-center justify-center gap-2"
                     >
                         <ArrowLeft size={20} /> Back to Blog
@@ -31,7 +35,7 @@ const BlogPost: React.FC<BlogPostProps> = ({ post, setPage, setSelectedBlogPost 
         <div className="pb-24 pt-20">
             <div className="max-w-4xl mx-auto px-4">
                 <button
-                    onClick={() => setPage(Page.Blog)}
+                    onClick={() => navigate('/blog')}
                     className="mb-8 flex items-center text-gray-500 hover:text-black transition-colors group"
                 >
                     <ArrowLeft size={20} className="mr-2 group-hover:-translate-x-1 transition-transform" />
@@ -82,10 +86,7 @@ const BlogPost: React.FC<BlogPostProps> = ({ post, setPage, setSelectedBlogPost 
                                         <div>
                                             {prevPost && (
                                                 <button
-                                                    onClick={() => {
-                                                        setSelectedBlogPost(prevPost);
-                                                        window.scrollTo(0, 0);
-                                                    }}
+                                                    onClick={() => navigate(`/blog/${prevPost.id}`)}
                                                     className="text-left group"
                                                 >
                                                     <p className="text-xs text-gray-400 font-bold uppercase tracking-widest mb-1 group-hover:text-blue-600 transition-colors">Previous</p>
@@ -96,10 +97,7 @@ const BlogPost: React.FC<BlogPostProps> = ({ post, setPage, setSelectedBlogPost 
                                         <div>
                                             {nextPost && (
                                                 <button
-                                                    onClick={() => {
-                                                        setSelectedBlogPost(nextPost);
-                                                        window.scrollTo(0, 0);
-                                                    }}
+                                                    onClick={() => navigate(`/blog/${nextPost.id}`)}
                                                     className="text-right group"
                                                 >
                                                     <p className="text-xs text-gray-400 font-bold uppercase tracking-widest mb-1 group-hover:text-blue-600 transition-colors">Next</p>

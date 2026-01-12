@@ -1,28 +1,43 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { useNavigate, useParams } from 'react-router-dom';
 import { SERVICES_DATA } from '../constants';
-import { Page } from '../types';
 
-const Services: React.FC<{
-  setPage: (p: Page) => void;
-  setSelectedService?: (s: string) => void;
-  targetSection?: string | null;
-  setTargetSection?: (s: string | null) => void;
-}> = ({ setPage, setSelectedService, targetSection, setTargetSection }) => {
+const Services: React.FC = () => {
+  const navigate = useNavigate();
+  const { serviceId } = useParams();
 
-  React.useEffect(() => {
-    if (targetSection) {
-      const element = document.getElementById(targetSection);
+  useEffect(() => {
+    if (serviceId) {
+      const element = document.getElementById(serviceId);
       if (element) {
         // Add a small delay/timeout to ensure layout is ready
         setTimeout(() => {
           element.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          if (setTargetSection) setTargetSection(null);
         }, 100);
       }
     }
-  }, [targetSection, setTargetSection]);
+  }, [serviceId]);
+
+  // Also handle hash-based navigation from footer links
+  useEffect(() => {
+    const handleHash = () => {
+      const hash = window.location.hash.slice(1);
+      if (hash) {
+        const element = document.getElementById(hash);
+        if (element) {
+          setTimeout(() => {
+            element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }, 100);
+        }
+      }
+    };
+
+    handleHash();
+    window.addEventListener('hashchange', handleHash);
+    return () => window.removeEventListener('hashchange', handleHash);
+  }, []);
 
   return (
     <div className="pb-24">
@@ -82,10 +97,7 @@ const Services: React.FC<{
                 </div>
 
                 <button
-                  onClick={() => {
-                    if (setSelectedService) setSelectedService(service.id);
-                    setPage(Page.Contact);
-                  }}
+                  onClick={() => navigate(`/contact/${service.id}`)}
                   className="w-full md:w-auto bg-black text-white px-10 py-4 font-bold voxel-border hover:bg-gray-800 transition-colors"
                 >
                   Request Quote

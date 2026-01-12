@@ -1,19 +1,14 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import { BLOG_POSTS } from '../constants';
-import { Page, BlogPost } from '../types';
+import { BlogPost } from '../types';
 
-interface BlogProps {
-    setPage?: (page: Page) => void;
-    setSelectedBlogPost?: (post: BlogPost) => void;
-}
+const Blog: React.FC = () => {
+    const navigate = useNavigate();
 
-const Blog: React.FC<BlogProps> = ({ setPage, setSelectedBlogPost }) => {
     const handleReadMore = (post: BlogPost) => {
-        if (setPage && setSelectedBlogPost) {
-            setSelectedBlogPost(post);
-            setPage(Page.BlogPost);
-        }
+        navigate(`/blog/${post.id}`);
     };
 
     return (

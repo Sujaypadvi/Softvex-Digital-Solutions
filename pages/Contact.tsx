@@ -2,10 +2,13 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Send, MapPin, Phone, Mail, CheckCircle } from 'lucide-react';
+import { useParams } from 'react-router-dom';
 import { submitContactForm } from '../firebase';
 import FunFactDisplay from '../components/FunFactDisplay';
 
-const Contact: React.FC<{ selectedService?: string | null }> = ({ selectedService }) => {
+const Contact: React.FC = () => {
+  const { serviceId } = useParams();
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -17,10 +20,10 @@ const Contact: React.FC<{ selectedService?: string | null }> = ({ selectedServic
   const [submitted, setSubmitted] = useState(false);
 
   React.useEffect(() => {
-    if (selectedService) {
-      setFormData(prev => ({ ...prev, service: selectedService }));
+    if (serviceId) {
+      setFormData(prev => ({ ...prev, service: serviceId }));
     }
-  }, [selectedService]);
+  }, [serviceId]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

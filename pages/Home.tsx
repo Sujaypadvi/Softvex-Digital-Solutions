@@ -1,8 +1,8 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import { ArrowRight, Star, Layout, Smartphone, Settings, TrendingUp } from 'lucide-react';
-import { Page } from '../types';
 import { SERVICES_DATA, TECHNOLOGIES, WHY_CHOOSE_US } from '../constants';
 import VoxelBackground from '../components/VoxelBackground';
 
@@ -14,7 +14,8 @@ const IconMap: Record<string, React.ElementType> = {
   TrendingUp,
 };
 
-const Home: React.FC<{ setPage: (p: Page) => void }> = ({ setPage }) => {
+const Home: React.FC = () => {
+  const navigate = useNavigate();
   return (
     <div className="relative">
       {/* Hero Section */}
@@ -40,14 +41,14 @@ const Home: React.FC<{ setPage: (p: Page) => void }> = ({ setPage }) => {
             </p>
             <div className="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-6">
               <button
-                onClick={() => setPage(Page.Services)}
+                onClick={() => navigate('/services')}
                 className="w-full sm:w-auto voxel-border bg-black text-white px-8 py-4 font-bold text-lg flex items-center justify-center group"
               >
                 Get Started
                 <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
               </button>
               <button
-                onClick={() => setPage(Page.Contact)}
+                onClick={() => navigate('/contact')}
                 className="w-full sm:w-auto voxel-border bg-white text-black px-8 py-4 font-bold text-lg"
               >
                 Contact Us
@@ -107,7 +108,7 @@ const Home: React.FC<{ setPage: (p: Page) => void }> = ({ setPage }) => {
                   <h3 className="text-xl font-bold mb-4">{service.title}</h3>
                   <p className="text-gray-500 flex-grow mb-8">{service.description}</p>
                   <button
-                    onClick={() => setPage(Page.Services)}
+                    onClick={() => navigate('/services')}
                     className="text-sm font-bold text-green-600 flex items-center hover:underline"
                   >
                     Learn More <ArrowRight size={16} className="ml-1" />
@@ -180,7 +181,7 @@ const Home: React.FC<{ setPage: (p: Page) => void }> = ({ setPage }) => {
             Our engineers are ready to turn your complex problems into elegant digital solutions. Let's talk strategy.
           </p>
           <button
-            onClick={() => setPage(Page.Contact)}
+            onClick={() => navigate('/contact')}
             className="bg-green-300 text-black px-10 py-5 font-bold text-xl voxel-border hover:bg-green-400"
           >
             Start Your Project
