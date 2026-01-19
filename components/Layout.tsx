@@ -30,6 +30,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   const navItems = [
     { label: 'Home', path: '/' },
     { label: 'About', path: '/about' },
+    { label: 'Projects', path: '/projects' },
     { label: 'Services', path: '/services' },
     { label: 'Contact', path: '/contact' },
   ];

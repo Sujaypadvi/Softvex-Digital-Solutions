@@ -65,7 +65,7 @@ const About: React.FC = () => {
                   <div className="hidden md:block w-5/12"></div>
 
                   {/* Center Dot */}
-                  <div className="absolute left-8 md:left-1/2 w-4 h-4 bg-white border-2 border-black rounded-full z-20 md:-translate-x-1/2 top-8 md:top-1/2 md:-translate-y-1/2 shadow-[0_0_0_4px_white]"></div>
+                  <div className="absolute left-8 md:left-1/2 w-4 h-4 bg-white border-2 border-black rounded-full z-20 md:-translate-x-1/2 top-14 md:top-1/2 md:-translate-y-1/2 shadow-[0_0_0_4px_white]"></div>
 
                   {/* Content Card Side */}
                   <div className="w-full pl-20 md:pl-0 md:w-5/12 py-8">
@@ -117,7 +117,7 @@ const About: React.FC = () => {
                 'Long-term partnership focus'
               ].map((val, idx) => (
                 <div key={idx} className="flex items-center space-x-4">
-                  <CheckCircle2 className="text-green-500" />
+                  <CheckCircle2 className="text-green-500 flex-shrink-0" />
                   <span className="text-xl font-medium">{val}</span>
                 </div>
               ))}

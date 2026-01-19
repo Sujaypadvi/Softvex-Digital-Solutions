@@ -133,3 +133,34 @@ export const BLOG_POSTS = [
     author: 'Michael Ross, Founder'
   }
 ];
+
+import pravasyaImage from './assets/pravasya.png';
+import azureParadiseImage from './assets/azure-paradise.png';
+import luxNestImage from './assets/lux-nest.png';
+
+export const DEMO_PROJECTS = [
+  {
+    title: 'Pravasya - Maharashtra Tourism',
+    desc: 'Discover the beauty of Maharashtra with Pravasya. From Konkan beaches to Sahyadri forts – plan your perfect Maharashtra journey.',
+    image: pravasyaImage,
+    link: 'https://pravasya.vercel.app/'
+  },
+  {
+    title: 'Azure Paradise Resort',
+    desc: 'Experience the ultimate beachfront luxury at Azure Paradise Resort. World-class amenities, stunning ocean views, and unforgettable experiences await.',
+    image: azureParadiseImage,
+    link: 'https://azure-paradise-rkfa.vercel.app/'
+  },
+  {
+    title: 'Rishabh Instruments',
+    desc: 'Corporate website showcasing innovative instrumentation solutions and products.',
+    image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80',
+    link: 'https://rishabh-instruments.netlify.app'
+  },
+  {
+    title: 'LuxNest Realty',
+    desc: 'Discover architectural masterpieces and luxury properties curated for the discerning few.',
+    image: luxNestImage,
+    link: 'https://lux-nest.vercel.app/'
+  }
+];

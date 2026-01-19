@@ -3,7 +3,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { ArrowRight, Star, Layout, Smartphone, Settings, TrendingUp } from 'lucide-react';
-import { SERVICES_DATA, TECHNOLOGIES, WHY_CHOOSE_US } from '../constants';
+import { SERVICES_DATA, TECHNOLOGIES, WHY_CHOOSE_US, DEMO_PROJECTS } from '../constants';
 import VoxelBackground from '../components/VoxelBackground';
 
 // Helper to map icon string names to Lucide icon components
@@ -116,6 +116,57 @@ const Home: React.FC = () => {
                 </motion.div>
               );
             })}
+          </div>
+        </div>
+      </section>
+
+      {/* Demo Projects Section */}
+      <section className="py-24 px-4 bg-white border-y border-gray-100">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-black mb-4">Our Work</h2>
+            <div className="w-24 h-2 bg-blue-300 mx-auto"></div>
+            <p className="mt-4 text-gray-500 max-w-2xl mx-auto">Explore some of our recent projects and see how we help businesses transform their digital presence.</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+            {DEMO_PROJECTS.map((project, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: idx * 0.1 }}
+                viewport={{ once: true }}
+                className="group relative bg-white voxel-border overflow-hidden"
+              >
+                <div className="aspect-video overflow-hidden">
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className={`w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ${project.title.includes('Pravasya') ? 'object-left' : 'object-center'}`}
+                  />
+                </div>
+                <div className="p-8">
+                  <h3 className="text-2xl font-bold mb-3">{project.title}</h3>
+                  <p className="text-gray-500 mb-6 line-clamp-3">{project.desc}</p>
+                  <button
+                    onClick={() => navigate('/projects')}
+                    className="inline-flex items-center text-sm font-bold text-black border-b-2 border-black pb-1 hover:text-blue-600 hover:border-blue-600 transition-colors"
+                  >
+                    View Project <ArrowRight size={16} className="ml-2" />
+                  </button>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          <div className="text-center mt-12">
+            <button
+              onClick={() => navigate('/projects')}
+              className="inline-flex items-center text-lg font-bold text-blue-600 hover:text-blue-800 transition-colors border-b-2 border-transparent hover:border-blue-800"
+            >
+              View All Projects <ArrowRight size={20} className="ml-2" />
+            </button>
           </div>
         </div>
       </section>
