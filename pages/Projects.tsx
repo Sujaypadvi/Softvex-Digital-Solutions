@@ -8,8 +8,8 @@ const Projects: React.FC = () => {
         <div className="pb-24">
             <section className="py-20 px-4 bg-white">
                 <div className="max-w-4xl mx-auto text-center">
-                    <h1 className="text-6xl font-black mb-6">Our Projects</h1>
-                    <p className="text-xl text-gray-500">Showcasing our best work and digital innovations.</p>
+                    <h1 className="text-5xl md:text-7xl font-black mb-6">Our <span className="text-blue-500">Projects</span></h1>
+                    <p className="text-xl text-gray-500 pl-2">Showcasing our best work and digital innovations.</p>
                 </div>
             </section>
 

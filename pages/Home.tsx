@@ -1,8 +1,13 @@
 
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import nature1 from '../assets/nature1.jpg';
+import nature2 from '../assets/nature2.jpg';
+import nature3 from '../assets/nature3.jpg';
+import nature4 from '../assets/nature4.jpg';
+import nature5 from '../assets/nature5.jpg';
 import { useNavigate } from 'react-router-dom';
-import { ArrowRight, Star, Layout, Smartphone, Settings, TrendingUp } from 'lucide-react';
+import { ArrowRight, Star, Layout, Smartphone, Settings, TrendingUp, ChevronDown } from 'lucide-react';
 import { SERVICES_DATA, TECHNOLOGIES, WHY_CHOOSE_US, DEMO_PROJECTS } from '../constants';
 import VoxelBackground from '../components/VoxelBackground';
 
@@ -14,8 +19,25 @@ const IconMap: Record<string, React.ElementType> = {
   TrendingUp,
 };
 
+const NATURE_IMAGES = [
+  nature1,
+  nature2,
+  nature3,
+  nature4,
+  nature5
+];
+
 const Home: React.FC = () => {
   const navigate = useNavigate();
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prev) => (prev + 1) % NATURE_IMAGES.length);
+    }, 5000); // Changed to 5 seconds
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className="relative">
       {/* Hero Section */}
@@ -55,6 +77,23 @@ const Home: React.FC = () => {
               </button>
             </div>
           </motion.div>
+
+          {/* Scroll Down Indicator */}
+          <div className="absolute bottom-10 left-0 right-0 z-10 flex justify-center pointer-events-none">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1, y: [0, 10, 0] }}
+              transition={{
+                opacity: { delay: 1, duration: 1 },
+                y: { duration: 1.5, repeat: Infinity, ease: "easeInOut" }
+              }}
+              className="flex flex-col items-center cursor-pointer pointer-events-auto"
+              onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
+            >
+              <span className="text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">Scroll Down</span>
+              <ChevronDown className="text-gray-400" size={24} />
+            </motion.div>
+          </div>
         </div>
       </section>
 
@@ -130,7 +169,7 @@ const Home: React.FC = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-            {DEMO_PROJECTS.map((project, idx) => (
+            {DEMO_PROJECTS.slice(0, 3).map((project, idx) => (
               <motion.div
                 key={idx}
                 initial={{ opacity: 0, y: 20 }}
@@ -150,7 +189,12 @@ const Home: React.FC = () => {
                   <h3 className="text-2xl font-bold mb-3">{project.title}</h3>
                   <p className="text-gray-500 mb-6 line-clamp-3">{project.desc}</p>
                   <button
-                    onClick={() => navigate('/projects')}
+                    onClick={() => {
+                      // Push /projects to history so back button works as requested
+                      window.history.pushState(null, "", "/projects");
+                      // Navigate directly to the external project link
+                      window.location.href = project.link;
+                    }}
                     className="inline-flex items-center text-sm font-bold text-black border-b-2 border-black pb-1 hover:text-blue-600 hover:border-blue-600 transition-colors"
                   >
                     View Project <ArrowRight size={16} className="ml-2" />
@@ -193,10 +237,22 @@ const Home: React.FC = () => {
             </div>
             <div className="relative">
               <div className="aspect-square bg-blue-50 voxel-border relative overflow-hidden">
-                <img src="https://picsum.photos/800/800?grayscale" alt="Team working" className="w-full h-full object-cover opacity-50" />
-                <div className="absolute inset-0 bg-gradient-to-tr from-green-200/40 to-blue-200/40" />
-                <div className="absolute bottom-6 left-6 right-6 bg-white voxel-border p-6 shadow-xl">
+                <AnimatePresence>
+                  <motion.img
+                    key={currentImageIndex}
+                    src={NATURE_IMAGES[currentImageIndex]}
+                    alt="Nature"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 0.5 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 2 }}
+                    className="absolute inset-0 w-full h-full object-cover"
+                  />
+                </AnimatePresence>
+                <div className="absolute inset-0 bg-gradient-to-tr from-green-200/40 to-blue-200/40 z-10" />
+                <div className="absolute bottom-6 left-6 right-6 bg-white voxel-border p-6 shadow-xl z-20">
                   <h4 className="text-xs font-bold uppercase tracking-widest text-gray-400 mb-4 text-center">Our Promise</h4>
+
                   <div className="space-y-4">
                     <div className="flex items-center space-x-3">
                       <div className="w-8 h-8 bg-blue-100 flex items-center justify-center text-blue-600 rounded-lg">

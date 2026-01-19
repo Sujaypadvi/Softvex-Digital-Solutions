@@ -43,8 +43,8 @@ const Services: React.FC = () => {
     <div className="pb-24">
       <section className="py-20 px-4 bg-white">
         <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-6xl font-black mb-6">Our Solutions</h1>
-          <p className="text-xl text-gray-500">Comprehensive digital services tailored for the modern enterprise.</p>
+          <h1 className="text-5xl md:text-7xl font-black mb-6">Our <span className="text-blue-500">Solutions</span></h1>
+          <p className="text-xl text-gray-500 pl-2">Comprehensive digital services tailored for the modern enterprise.</p>
         </div>
       </section>
 
