@@ -2,10 +2,19 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { DEMO_PROJECTS } from '../constants';
+import SEOHelmet from '../components/SEOHelmet';
+import { PAGE_SEO } from '../seo-config';
 
 const Projects: React.FC = () => {
     return (
         <div className="pb-24">
+            <SEOHelmet
+                title={PAGE_SEO.projects.title}
+                description={PAGE_SEO.projects.description}
+                keywords={PAGE_SEO.projects.keywords}
+                image={PAGE_SEO.projects.image}
+                type="website"
+            />
             <section className="py-20 px-4 bg-white">
                 <div className="max-w-4xl mx-auto text-center">
                     <h1 className="text-5xl md:text-7xl font-black mb-6">Our <span className="text-blue-500">Projects</span></h1>

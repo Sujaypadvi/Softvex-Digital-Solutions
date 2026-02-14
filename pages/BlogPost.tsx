@@ -4,6 +4,8 @@ import { ArrowLeft, Calendar, Tag } from 'lucide-react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { BlogPost as BlogPostType } from '../types';
 import { BLOG_POSTS } from '../constants';
+import SEOHelmet from '../components/SEOHelmet';
+import { SEO_CONFIG } from '../seo-config';
 
 const BlogPost: React.FC = () => {
     const navigate = useNavigate();
@@ -31,8 +33,41 @@ const BlogPost: React.FC = () => {
         );
     }
 
+    // Article Structured Data for blog post
+    const articleSchema = {
+        '@context': 'https://schema.org',
+        '@type': 'BlogPosting',
+        headline: post.title,
+        image: post.image,
+        datePublished: post.date,
+        author: {
+            '@type': 'Person',
+            name: post.author
+        },
+        publisher: {
+            '@type': 'Organization',
+            name: SEO_CONFIG.company.name,
+            logo: {
+                '@type': 'ImageObject',
+                url: `${SEO_CONFIG.siteUrl}/softvex-icon.png`
+            }
+        },
+        description: post.excerpt,
+        articleBody: post.content.join('\n\n')
+    };
+
     return (
         <div className="pb-24 pt-20">
+            <SEOHelmet
+                title={`${post.title} | Softvex Blog`}
+                description={post.excerpt}
+                keywords={`${post.category}, blog, tech insights, ${post.title}`}
+                image={post.image}
+                type="article"
+                author={post.author}
+                publishedTime={post.date}
+                structuredData={articleSchema}
+            />
             <div className="max-w-4xl mx-auto px-4">
                 <button
                     onClick={() => navigate('/blog')}

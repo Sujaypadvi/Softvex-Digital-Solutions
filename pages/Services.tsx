@@ -3,6 +3,8 @@ import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate, useParams } from 'react-router-dom';
 import { SERVICES_DATA } from '../constants';
+import SEOHelmet from '../components/SEOHelmet';
+import { PAGE_SEO } from '../seo-config';
 
 const Services: React.FC = () => {
   const navigate = useNavigate();
@@ -41,6 +43,13 @@ const Services: React.FC = () => {
 
   return (
     <div className="pb-24">
+      <SEOHelmet
+        title={PAGE_SEO.services.title}
+        description={PAGE_SEO.services.description}
+        keywords={PAGE_SEO.services.keywords}
+        image={PAGE_SEO.services.image}
+        type="website"
+      />
       <section className="py-20 px-4 bg-white">
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-5xl md:text-7xl font-black mb-6">Our <span className="text-blue-500">Solutions</span></h1>

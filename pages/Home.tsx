@@ -10,6 +10,8 @@ import { useNavigate } from 'react-router-dom';
 import { ArrowRight, Star, Layout, Smartphone, Settings, TrendingUp, ChevronDown } from 'lucide-react';
 import { SERVICES_DATA, TECHNOLOGIES, WHY_CHOOSE_US, DEMO_PROJECTS } from '../constants';
 import VoxelBackground from '../components/VoxelBackground';
+import SEOHelmet from '../components/SEOHelmet';
+import { PAGE_SEO, SEO_CONFIG } from '../seo-config';
 
 // Helper to map icon string names to Lucide icon components
 const IconMap: Record<string, React.ElementType> = {
@@ -38,8 +40,45 @@ const Home: React.FC = () => {
     return () => clearInterval(interval);
   }, []);
 
+  // Organization Structured Data for Homepage
+  const organizationSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: SEO_CONFIG.company.name,
+    alternateName: SEO_CONFIG.company.alternateName,
+    legalName: SEO_CONFIG.company.legalName,
+    url: SEO_CONFIG.siteUrl,
+    logo: `${SEO_CONFIG.siteUrl}/softvex-icon.png`,
+    foundingDate: SEO_CONFIG.company.foundingDate,
+    contactPoint: {
+      '@type': 'ContactPoint',
+      telephone: SEO_CONFIG.company.telephone,
+      contactType: 'Customer Service',
+      email: SEO_CONFIG.company.email,
+      availableLanguage: ['English', 'Hindi']
+    },
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: SEO_CONFIG.company.address.streetAddress,
+      addressLocality: SEO_CONFIG.company.address.addressLocality,
+      addressRegion: SEO_CONFIG.company.address.addressRegion,
+      postalCode: SEO_CONFIG.company.address.postalCode,
+      addressCountry: SEO_CONFIG.company.address.addressCountry
+    },
+    sameAs: SEO_CONFIG.company.sameAs
+  };
+
   return (
     <div className="relative">
+      {/* SEO Meta Tags */}
+      <SEOHelmet
+        title={PAGE_SEO.home.title}
+        description={PAGE_SEO.home.description}
+        keywords={PAGE_SEO.home.keywords}
+        image={PAGE_SEO.home.image}
+        type="website"
+        structuredData={organizationSchema}
+      />
       {/* Hero Section */}
       <section className="relative px-4 pt-20 pb-32 sm:px-6 lg:px-8 overflow-hidden">
         <VoxelBackground />

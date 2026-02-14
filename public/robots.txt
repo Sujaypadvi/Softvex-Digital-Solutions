@@ -1,0 +1,11 @@
+# Softvex Digital Solutions - robots.txt
+
+# Allow all crawlers to access all content
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://www.softvex.in/sitemap.xml
+
+# Crawl-delay (optional, adjust if needed)
+# Crawl-delay: 10

@@ -3,6 +3,8 @@ import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { BLOG_POSTS } from '../constants';
 import { BlogPost } from '../types';
+import SEOHelmet from '../components/SEOHelmet';
+import { PAGE_SEO } from '../seo-config';
 
 const Blog: React.FC = () => {
     const navigate = useNavigate();
@@ -13,6 +15,13 @@ const Blog: React.FC = () => {
 
     return (
         <div className="pb-24">
+            <SEOHelmet
+                title={PAGE_SEO.blog.title}
+                description={PAGE_SEO.blog.description}
+                keywords={PAGE_SEO.blog.keywords}
+                image={PAGE_SEO.blog.image}
+                type="website"
+            />
             <section className="py-20 px-4 bg-gray-50 border-b border-gray-200">
                 <div className="max-w-4xl mx-auto text-center">
                     <div className="inline-block px-3 py-1 mb-4 text-xs font-bold tracking-widest text-blue-600 uppercase bg-blue-100 rounded-full">

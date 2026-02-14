@@ -5,6 +5,8 @@ import { Send, MapPin, Phone, Mail, CheckCircle } from 'lucide-react';
 import { useParams } from 'react-router-dom';
 import { submitContactForm } from '../firebase';
 import FunFactDisplay from '../components/FunFactDisplay';
+import SEOHelmet from '../components/SEOHelmet';
+import { PAGE_SEO, SEO_CONFIG } from '../seo-config';
 
 const Contact: React.FC = () => {
   const { serviceId } = useParams();
@@ -34,8 +36,31 @@ const Contact: React.FC = () => {
     setFormData({ name: '', email: '', phone: '', service: 'web-dev', message: '' });
   };
 
+  // ContactPage Structured Data
+  const contactPageSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'ContactPage',
+    name: 'Contact Us - Softvex',
+    description: PAGE_SEO.contact.description,
+    url: `${SEO_CONFIG.siteUrl}/contact`,
+    mainEntity: {
+      '@type': 'Organization',
+      name: SEO_CONFIG.company.name,
+      email: SEO_CONFIG.company.email,
+      telephone: SEO_CONFIG.company.telephone
+    }
+  };
+
   return (
     <div className="pb-24 px-4">
+      <SEOHelmet
+        title={PAGE_SEO.contact.title}
+        description={PAGE_SEO.contact.description}
+        keywords={PAGE_SEO.contact.keywords}
+        image={PAGE_SEO.contact.image}
+        type="website"
+        structuredData={contactPageSchema}
+      />
       <div className="max-w-7xl mx-auto">
         <div className="py-20 text-center">
           <h1 className="text-5xl md:text-7xl font-black mb-6">Let's <span className="text-green-500">Connect</span>.</h1>
@@ -187,16 +212,30 @@ const Contact: React.FC = () => {
 
           <div className="space-y-12">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="p-6 bg-white voxel-border text-center group hover:border-blue-200 transition-colors">
-                <div className="flex justify-center mb-3 text-blue-400"><Mail /></div>
+              <a
+                href="https://mail.google.com/mail/?view=cm&to=info@softvex.in&su=Inquiry%20from%20Website"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block p-6 bg-white voxel-border text-center group hover:border-blue-200 transition-all cursor-pointer hover:shadow-lg"
+              >
+                <div className="flex justify-center mb-3 text-blue-400 group-hover:text-blue-600 transition-colors"><Mail /></div>
                 <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">Inquiries</p>
-                <a href="mailto:info@softvex.in" className="text-sm font-medium hover:text-blue-600 transition-colors">info@softvex.in</a>
-              </div>
-              <div className="p-6 bg-white voxel-border text-center group hover:border-green-200 transition-colors">
-                <div className="flex justify-center mb-3 text-green-400"><Mail /></div>
+                <p className="text-sm font-medium text-gray-800 group-hover:text-blue-600 transition-colors">
+                  info@softvex.in
+                </p>
+              </a>
+              <a
+                href="https://mail.google.com/mail/?view=cm&to=support@softvex.in&su=Support%20Request%20from%20Website"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block p-6 bg-white voxel-border text-center group hover:border-green-200 transition-all cursor-pointer hover:shadow-lg"
+              >
+                <div className="flex justify-center mb-3 text-green-400 group-hover:text-green-600 transition-colors"><Mail /></div>
                 <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">Support</p>
-                <a href="mailto:support@softvex.in" className="text-sm font-medium hover:text-green-600 transition-colors">support@softvex.in</a>
-              </div>
+                <p className="text-sm font-medium text-gray-800 group-hover:text-green-600 transition-colors">
+                  support@softvex.in
+                </p>
+              </a>
             </div>
 
             <div className="mt-12">

@@ -1,6 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { CheckCircle2 } from 'lucide-react';
+import SEOHelmet from '../components/SEOHelmet';
+import { PAGE_SEO, SEO_CONFIG } from '../seo-config';
 
 const About: React.FC = () => {
   const processSteps = [
@@ -12,8 +14,37 @@ const About: React.FC = () => {
     { title: 'Launch', desc: 'Seamless deployment and ongoing support.' },
   ];
 
+  // LocalBusiness Structured Data
+  const localBusinessSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'LocalBusiness',
+    name: SEO_CONFIG.company.name,
+    image: `${SEO_CONFIG.siteUrl}/softvex-icon.png`,
+    '@id': SEO_CONFIG.siteUrl,
+    url: SEO_CONFIG.siteUrl,
+    telephone: SEO_CONFIG.company.telephone,
+    email: SEO_CONFIG.company.email,
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: SEO_CONFIG.company.address.streetAddress,
+      addressLocality: SEO_CONFIG.company.address.addressLocality,
+      addressRegion: SEO_CONFIG.company.address.addressRegion,
+      postalCode: SEO_CONFIG.company.address.postalCode,
+      addressCountry: SEO_CONFIG.company.address.addressCountry
+    },
+    sameAs: SEO_CONFIG.company.sameAs
+  };
+
   return (
     <div className="pb-24">
+      <SEOHelmet
+        title={PAGE_SEO.about.title}
+        description={PAGE_SEO.about.description}
+        keywords={PAGE_SEO.about.keywords}
+        image={PAGE_SEO.about.image}
+        type="website"
+        structuredData={localBusinessSchema}
+      />
       {/* Intro */}
       <section className="py-20 px-4">
         <div className="max-w-4xl mx-auto">

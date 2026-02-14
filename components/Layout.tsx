@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, ChevronRight, Github, Twitter, Linkedin, Mail } from 'lucide-react';
+import { Menu, X, ChevronRight, Linkedin, Instagram, Facebook, Mail } from 'lucide-react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 import logo from '../assets/logo.png';
@@ -133,9 +133,9 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                 Empowering businesses with cutting-edge digital infrastructure and creative software solutions.
               </p>
               <div className="flex space-x-4">
-                <a href="#" className="p-2 bg-gray-100 hover:bg-green-100 transition-colors"><Twitter size={18} /></a>
-                <a href="#" className="p-2 bg-gray-100 hover:bg-green-100 transition-colors"><Linkedin size={18} /></a>
-                <a href="#" className="p-2 bg-gray-100 hover:bg-green-100 transition-colors"><Github size={18} /></a>
+                <a href="https://www.linkedin.com/company/softvex-digital-solutions" target="_blank" rel="noopener noreferrer" className="p-2 bg-gray-100 hover:bg-green-100 transition-colors" aria-label="LinkedIn"><Linkedin size={18} /></a>
+                <a href="https://www.instagram.com/softvex.in?igsh=MWpheGQzbzRhaGVjOQ==" target="_blank" rel="noopener noreferrer" className="p-2 bg-gray-100 hover:bg-green-100 transition-colors" aria-label="Instagram"><Instagram size={18} /></a>
+                <a href="https://www.facebook.com/profile.php?id=61588017277581" target="_blank" rel="noopener noreferrer" className="p-2 bg-gray-100 hover:bg-green-100 transition-colors" aria-label="Facebook"><Facebook size={18} /></a>
               </div>
             </div>
 
@@ -170,14 +170,28 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                   <Mail size={16} className="text-blue-500" />
                   <div className="flex flex-col">
                     <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Info</span>
-                    <a href="mailto:info@softvex.in" className="hover:text-blue-600 transition-colors">info@softvex.in</a>
+                    <a
+                      href="https://mail.google.com/mail/?view=cm&to=info@softvex.in&su=Inquiry%20from%20Website"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:text-blue-600 transition-colors cursor-pointer"
+                    >
+                      info@softvex.in
+                    </a>
                   </div>
                 </li>
                 <li className="flex items-center space-x-3">
                   <Mail size={16} className="text-green-500" />
                   <div className="flex flex-col">
                     <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Support</span>
-                    <a href="mailto:support@softvex.in" className="hover:text-green-600 transition-colors">support@softvex.in</a>
+                    <a
+                      href="https://mail.google.com/mail/?view=cm&to=support@softvex.in&su=Support%20Request%20from%20Website"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:text-green-600 transition-colors cursor-pointer"
+                    >
+                      support@softvex.in
+                    </a>
                   </div>
                 </li>
               </ul>
