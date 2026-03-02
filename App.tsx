@@ -12,11 +12,13 @@ import Projects from './pages/Projects';
 import { motion, AnimatePresence } from 'framer-motion';
 
 import ScrollToTop from './components/ScrollToTop';
+import MetaPixel from './components/MetaPixel';
 
 const App: React.FC = () => {
   return (
     <BrowserRouter>
       <ScrollToTop />
+      <MetaPixel />
       <Layout>
         <Routes>
           <Route path="/" element={<Home />} />
