@@ -3,7 +3,7 @@ import { Menu, X, ChevronRight, Linkedin, Instagram, Facebook, Mail } from 'luci
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 import logo from '../assets/logo.png';
-import HoliBanner from './HoliBanner';
+import SpecialOfferBanner from './SpecialOfferBanner';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -47,8 +47,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
   return (
     <div className="min-h-screen flex flex-col bg-grid">
-      {/* Holi Banner - Global */}
-      <HoliBanner />
+      {/* Global Special Offer Banner */}
+      <SpecialOfferBanner />
 
       {/* Header */}
       <header className={`fixed left-0 right-0 z-50 transition-all duration-300 top-14 sm:top-16 ${scrolled ? 'glass border-b border-gray-200 py-3' : 'bg-transparent py-5'}`}>
